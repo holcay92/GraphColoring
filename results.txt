@@ -2,3 +2,8 @@
 		Sample1.txt : 11 (optimal:11 +)
 		Sample2.txt : 125 (optimal:50 -)
 		Sample3.txt : 142 (optimal:122 -)
+
+- Brooks' Aproach
+		Sample1.txt : 12 (optimal:11 -)
+		Sample2.txt : 126 (optimal:50 -)
+		Sample3.txt : 143 (optimal:122 -)
