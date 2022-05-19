@@ -1,0 +1,6 @@
+- Greedy Aproach
+		Sample1.txt : 11 (optimal:11 ++)
+		Sample2.txt : ERROR (ValueError: invalid literal for int() with base 10: '\n')
+				-sample2.txt dosyası yanlış olabilir.
+				-Dosya çok büyük olabilir
+		Sample3.txt : 142 (optimal:122 -)
