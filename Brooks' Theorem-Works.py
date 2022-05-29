@@ -1,4 +1,5 @@
 # A class to represent a graph object
+import random
 class Graph:
     def __init__(self, edges, n):
         self.adjList = [[] for _ in range(n)]
@@ -65,6 +66,6 @@ if __name__ == '__main__':
     for i in range(1, int(first[2])):
         temp = f.readline().rsplit(" ")
         g1 = addEdge(g1, int(temp[1]) - 1, int(temp[2]) - 1)
-
+    #g1=sorted(g1)
     # color graph using the greedy algorithm
     colorGraph(g1, int(first[1]))
