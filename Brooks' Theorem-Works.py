@@ -1,5 +1,7 @@
 # A class to represent a graph object
 import random
+
+
 class Graph:
     def __init__(self, edges, n):
         self.adjList = [[] for _ in range(n)]
@@ -8,6 +10,7 @@ class Graph:
         for (src, dest) in edges:
             self.adjList[src].append(dest)
             self.adjList[dest].append(src)
+
 
 def addEdge(adj, v, w):
     adj[v].append(w)
@@ -38,9 +41,9 @@ def colorGraph(graph, n):
         # assign vertex `u` the first available color
         result[u] = color
 
-    for v in range(n):
+    """for v in range(n):
         print(f'Color assigned to vertex {v+1} is {result[v]}')
-
+"""
     maxColor = 0
     for u in range(n):
         if int(result[u]) > maxColor:
@@ -52,13 +55,13 @@ def colorGraph(graph, n):
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample2.txt", encoding='utf-8-sig')
+    f = open("sample1.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
-    print(first[0])  # p
-    print(first[1])  # Number of Vertices
-    print(first[2])  # Number of Edges
+    print("p:", first[0])  # p
+    print("Number of Vertices:", first[1])  # Number of Vertices
+    print("Number of Edges:", first[2])  # Number of Edges
 
     # Create vertices number of given input
     g1 = [[] for i in range(int(first[1]))]
@@ -66,6 +69,14 @@ if __name__ == '__main__':
     for i in range(1, int(first[2])):
         temp = f.readline().rsplit(" ")
         g1 = addEdge(g1, int(temp[1]) - 1, int(temp[2]) - 1)
-    #g1=sorted(g1)
     # color graph using the greedy algorithm
+    print("original algorithm:")
+    colorGraph(g1, int(first[1]))
+
+    print("\nafter sorting:")
+    g2 = sorted(g1)
+    colorGraph(g2, int(first[1]))
+
+    print("\nafter shuffling:")
+    random.shuffle(g1)
     colorGraph(g1, int(first[1]))
