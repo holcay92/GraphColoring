@@ -57,37 +57,37 @@ def addEdge(adj, vertex, adjacent):
 
 
 def welshPowell(adj, num_of_ver):
-    indicator = 0
+    isColored = 0
     color = [-1] * num_of_ver
 
-    c = 0
+    currColor = 0
     for x in range(0, num_of_ver):
         if color[x] == -1:
-            # print("Girdi for x: ", x)
-            # print("color : ", c)
-            color[x] = c
+            print("Girdi for x: ", x)
+            print("color : ", currColor)
+            color[x] = currColor
             index = x
 
             for u in range(1, num_of_ver):
-                # print("vertex : ", u)
+                print("vertex : ", u)
                 for i in adj[u]:
-                    # print("komşu : ", i)
+                    print("komşu : ", i)
                     if i == index:
-                        indicator = 1
+                        isColored = 1
 
-                if indicator == 0 and color[u] == -1:
-                    # print("boyandı")
-                    color[u] = c
-                    # print("")
+                if isColored == 0 and color[u] == -1:
+                    print("boyandı")
+                    color[u] = currColor
+                    print("")
                 else:
-                    # print("not boyanmadı")
-                    indicator = 0
-                    # print(" ")
-            # print("color :", color)
-            # print(" ")
-            c += 1
-        #else:
-            # print("atla")
+                    print("not boyanmadı")
+                    isColored = 0
+                    print(" ")
+            print("color :", color)
+            print(" ")
+            currColor += 1
+        else:
+            print("atla")
 
     print("color :", color)
     maxColor = 0
@@ -101,7 +101,7 @@ def welshPowell(adj, num_of_ver):
 # Our sample1.txt file operations
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample1.txt", encoding='utf-8-sig')
+    f = open("sample.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -120,6 +120,7 @@ if __name__ == '__main__':
     originalG1 = g1
     print("original g1: \n", originalG1)
     g1 = sortCrowded(g1)
+    print("new g1:", g1)
     g1.reverse()
     fixedSorted = fixGraphList(originalG1, g1)
     print("fixed g1: \n", fixedSorted)
