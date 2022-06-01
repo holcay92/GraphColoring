@@ -3,7 +3,23 @@
 		Sample2.txt : 125 (optimal:50 -)
 		Sample3.txt : 142 (optimal:122 -)
 
+- Greedy Aproach (Sorted List)
+		Sample1.txt : 11 (optimal:11 +)
+		Sample2.txt : 121 (optimal:50 -)
+		Sample3.txt : 134(optimal:122 -)
+
 - Brooks' Aproach
 		Sample1.txt : 12 (optimal:11 -)
 		Sample2.txt : 126 (optimal:50 -)
 		Sample3.txt : 143 (optimal:122 -)
+		
+- Brooks' Aproach (Sorted List)
+		Sample1.txt : 11 (optimal:11 +)
+		Sample2.txt : 119 (optimal:50 -)
+		Sample3.txt : 134 (optimal:122 -)
+
+- Welsh-Powell Approach (Sorted List)
+		Sample1.txt : 11 (optimal:11 +)
+		Sample2.txt : - (optimal:50 -)
+		Sample3.txt : - (optimal:122 -)
+
