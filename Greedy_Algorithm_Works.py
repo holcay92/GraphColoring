@@ -1,33 +1,33 @@
-def fixGraphList(previous, current):
+def fixGraphList(original_list, sorted_raw_list):
     prevIndex = 0
     currIndex = 0
-    arr = [[0] * 2 for i in range(len(previous))]
+    modified_list = [[0] * 2 for i in range(len(original_list))]
 
     # Determine which vertex must be change with which vertex
-    for i in range(0, len(previous)):
+    for i in range(0, len(original_list)):
         prevIndex = i
-        for j in range(0, len(previous)):
+        for j in range(0, len(original_list)):
             # Search the same list in the adj list
-            if previous[i] == current[j]:
+            if original_list[i] == sorted_raw_list[j]:
                 currIndex = j
                 break
 
-        arr[i][0] = prevIndex
-        arr[i][1] = currIndex
+        modified_list[i][0] = prevIndex
+        modified_list[i][1] = currIndex
 
-    print("arr : ", arr)
+    #print("modified_list : ", modified_list)
 
     # Change the prev original list
-    for i in range(0, len(current)):
+    for i in range(0, len(sorted_raw_list)):
         # print("ilgili b : ", current[i])
-        for j in range(0, len(current[i])):
+        for j in range(0, len(sorted_raw_list[i])):
             # print("komşular ", j, " : ", current[i][j])
 
-            for z in range(0, len(current)):
-                # print("karşılaştır ", arr[z][0])
-                if current[i][j] == arr[z][0]:
+            for z in range(0, len(sorted_raw_list)):
+                # print("karşılaştır ", modified_list[z][0])
+                if sorted_raw_list[i][j] == modified_list[z][0]:
                     # print("exist")
-                    current[i][j] = arr[z][1]
+                    sorted_raw_list[i][j] = modified_list[z][1]
                     break
                 # else:
                     # print("not exist")
@@ -36,7 +36,7 @@ def fixGraphList(previous, current):
         # print(" ")
         # print(" ")
 
-    return current
+    return modified_list
 
 
 def sortCrowded(adj):
@@ -119,7 +119,7 @@ def greedyColoring(g1, V):
 # Our sample1.txt file operations
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample3.txt", encoding='utf-8-sig')
+    f = open("sample.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -144,6 +144,8 @@ if __name__ == '__main__':
     # print("sorted g1: \n", g1)
     g1.reverse()
     print("reversed g1: \n", g1)
-    a = fixGraphList(originalG1, g1)
-    print("fixed g1: \n", a)
-    greedyColoring(a, int(first[1]))
+    modified_list_binary = fixGraphList(originalG1, g1)
+    print("Modified List binary: \n", modified_list_binary)
+
+    print("fixed g1: \n", g1)
+    greedyColoring(g1, int(first[1]))
