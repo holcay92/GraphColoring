@@ -2,18 +2,10 @@
 import random
 
 
-class Graph:
-    def __init__(self, edges, n):
-        self.adjList = [[] for _ in range(n)]
-
-        # add edges to the undirected graph
-        for (src, dest) in edges:
-            self.adjList[src].append(dest)
-            self.adjList[dest].append(src)
-
 def sortCrowded(adj):
     adj2 = sorted(adj, key=len)
     return adj2
+
 
 def fixGraphList(previous, current):
     prevIndex = 0
@@ -47,7 +39,7 @@ def fixGraphList(previous, current):
                     current[i][j] = arr[z][1]
                     break
                 # else:
-                    # print("not exist")
+                # print("not exist")
             # print(" ")
 
         # print(" ")
@@ -75,16 +67,16 @@ def colorGraph(graph, n):
 
     # assign a color to vertex one by one
     for u in range(n):
-
         # check colors of adjacent vertices of `u` and store them in a set
         assigned = set([result.get(i) for i in graph[u] if i in result])
-
+        print("graph[u] : ", graph[u])
+        print("assigned : ", assigned)
         # check for the first free color
         color = 1
         for c in assigned:
             if color != c:
                 break
-            color = color + 1
+            color += 1
 
         # assign vertex `u` the first available color
         result[u] = color
@@ -98,12 +90,14 @@ def colorGraph(graph, n):
             maxColor = int(result[u])
 
     print("Maximum number of Color is : ", maxColor)
+    print("result dict: ", result)
+    print("assigned dict: ", assigned)
 
 
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample2.txt", encoding='utf-8-sig')
+    f = open("sample.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")

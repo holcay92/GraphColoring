@@ -5,29 +5,6 @@ class Graph(object):
         self.degree = degree
         self.color = color
 
-    def get_adjacency_list(self):
-        return self.adjacency_list
-
-    def set_adjacency_list(self, adjacency_list):
-        self.adjacency_list = adjacency_list
-
-    def get_isColored(self):
-        return self.isColored
-
-    def set_isColored(self, isColored):
-        self.isColored = isColored
-
-    def get_degree(self):
-        return self.degree
-
-    def set_degree(self, degree):
-        self.degree = degree
-
-    def get_color(self):
-        return self.color
-
-    def set_color(self, color):
-        self.color = color
 
 
 def sortCrowded(adj):
