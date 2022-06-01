@@ -52,7 +52,7 @@ def colorGraph(graph, n):
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample2.txt", encoding='utf-8-sig')
+    f = open("sample1.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
