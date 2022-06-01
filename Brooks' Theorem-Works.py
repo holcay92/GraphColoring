@@ -61,19 +61,19 @@ def addEdge(adj, vertex, adjacent):
 
 
 # Function to assign colors to vertices of a graph
-def colorGraph(graph, n):
-    # keep track of the color assigned to each vertex
+def colorGraph(adjacency_list, number_of_vertices):
+    # keep track of the color assigned_colors to each vertex
     result = {}
 
     # assign a color to vertex one by one
-    for u in range(n):
+    for u in range(number_of_vertices):
         # check colors of adjacent vertices of `u` and store them in a set
-        assigned = set([result.get(i) for i in graph[u] if i in result])
-        print("graph[u] : ", graph[u])
-        print("assigned : ", assigned)
+        assigned_colors = set([result.get(i) for i in adjacency_list[u] if i in result])
+        print("graph[u] : ", adjacency_list[u])
+        print("assigned_colors : ", assigned_colors)
         # check for the first free color
         color = 1
-        for c in assigned:
+        for c in assigned_colors:
             if color != c:
                 break
             color += 1
@@ -81,17 +81,17 @@ def colorGraph(graph, n):
         # assign vertex `u` the first available color
         result[u] = color
 
-    for v in range(n):
-        print(f'Color assigned to vertex {v + 1} is {result[v]}')
+    for v in range(number_of_vertices):
+        print(f'Color assigned_colors to vertex {v + 1} is {result[v]}')
 
     maxColor = 0
-    for u in range(n):
+    for u in range(number_of_vertices):
         if int(result[u]) > maxColor:
             maxColor = int(result[u])
 
     print("Maximum number of Color is : ", maxColor)
     print("result dict: ", result)
-    print("assigned dict: ", assigned)
+    print("assigned_colors dict: ", assigned_colors)
 
 
 # Greedy coloring of a graph
