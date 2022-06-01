@@ -1,7 +1,7 @@
 def fixGraphList(previous, current):
     prevIndex = 0
     currIndex = 0
-    arr = [[0] * 2 for i in range(len(previous))]
+    modifiedList = [[0] * 2 for i in range(len(previous))]
 
     # Determine which vertex must be change with which vertex
     for i in range(0, len(previous)):
@@ -12,10 +12,10 @@ def fixGraphList(previous, current):
                 currIndex = j
                 break
 
-        arr[i][0] = prevIndex
-        arr[i][1] = currIndex
+        modifiedList[i][0] = prevIndex
+        modifiedList[i][1] = currIndex
 
-    print("arr : ", arr)
+    print("modifiedList : ", modifiedList)
 
     # Change the prev original list
     for i in range(0, len(current)):
@@ -24,19 +24,33 @@ def fixGraphList(previous, current):
             # print("komşular ", j, " : ", current[i][j])
 
             for z in range(0, len(current)):
-                # print("karşılaştır ", arr[z][0])
-                if current[i][j] == arr[z][0]:
+                # print("karşılaştır ", modifiedList[z][0])
+                if current[i][j] == modifiedList[z][0]:
                     # print("exist")
-                    current[i][j] = arr[z][1]
+                    current[i][j] = modifiedList[z][1]
                     break
                 # else:
-                    # print("not exist")
+                # print("not exist")
             # print(" ")
 
         # print(" ")
         # print(" ")
 
-    return current
+    return modifiedList
+
+
+def returnToOrginal(current, modifiedList, colorList):
+    # Change the prev original list
+    for i in range(0, len(current)):
+        # print("vertex : ", modifiedList[i])
+        for j in range(0, len(current)):
+            # print("komşular ", j, " : ", modifiedList[i][0])
+            # print("j : ", j)
+            if j == modifiedList[i][0]:
+                print("Color of vertex", j+1, " :", colorList[modifiedList[j][1]])
+
+            # print(" ")
+        # print("")
 
 
 def sortCrowded(adj):
@@ -113,13 +127,15 @@ def greedyColoring(g1, V):
         if int(result[u]) > maxColor:
             maxColor = int(result[u])
 
-    print("Maximum number of Color is : ", maxColor+1)
+    print("Maximum number of Color is : ", maxColor + 1)
+
+    return result
 
 
 # Our sample1.txt file operations
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample3.txt", encoding='utf-8-sig')
+    f = open("sample.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -134,7 +150,7 @@ if __name__ == '__main__':
         temp = f.readline().rsplit(" ")
         g1 = addEdge(g1, int(temp[1]) - 1, int(temp[2]) - 1)
     print("g1: \n", g1)
-    greedyColoring(g1, int(first[1]))
+    colorList = greedyColoring(g1, int(first[1]))
 
     # Store the original graph in another list
     originalG1 = g1
@@ -144,6 +160,8 @@ if __name__ == '__main__':
     # print("sorted g1: \n", g1)
     g1.reverse()
     print("reversed g1: \n", g1)
-    a = fixGraphList(originalG1, g1)
-    print("fixed g1: \n", a)
-    greedyColoring(a, int(first[1]))
+    modifiedList_binary = fixGraphList(originalG1, g1)
+    print("fixed g1: \n", g1)
+    colorList = greedyColoring(g1, int(first[1]))
+    returnToOrginal(g1,modifiedList_binary, colorList)
+
