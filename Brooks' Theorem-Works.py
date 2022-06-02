@@ -24,7 +24,7 @@ def fixGraphList(previous, current):
         arr[i][0] = prevIndex
         arr[i][1] = currIndex
 
-    print("arr : ", arr)
+    #print("arr : ", arr)
 
     # Change the prev original list
     for i in range(0, len(current)):
@@ -68,9 +68,16 @@ def colorGraph(adjacency_list, number_of_vertices):
     # assign a color to vertex one by one
     for u in range(number_of_vertices):
         # check colors of adjacent vertices of `u` and store them in a set
-        assigned_colors = set([result.get(i) for i in adjacency_list[u] if i in result])
+        assigned_colors: list = []
+        for i in adjacency_list[u]:
+            if i in result:
+                if result.get(i) not in assigned_colors:
+                    assigned_colors.append(result.get(i))
+                    assigned_colors.sort()
+
+        """print("result : ",u,": ", result)
         print("graph[u] : ", adjacency_list[u])
-        print("assigned_colors : ", assigned_colors)
+        print("assigned_colors : ", assigned_colors)"""
         # check for the first free color
         color = 1
         for c in assigned_colors:
@@ -81,8 +88,8 @@ def colorGraph(adjacency_list, number_of_vertices):
         # assign vertex `u` the first available color
         result[u] = color
 
-    for v in range(number_of_vertices):
-        print(f'Color assigned_colors to vertex {v + 1} is {result[v]}')
+    """for v in range(number_of_vertices):
+        print(f'Color assigned_colors to vertex {v + 1} is {result[v]}')"""
 
     maxColor = 0
     for u in range(number_of_vertices):
@@ -90,14 +97,14 @@ def colorGraph(adjacency_list, number_of_vertices):
             maxColor = int(result[u])
 
     print("Maximum number of Color is : ", maxColor)
-    print("result dict: ", result)
-    print("assigned_colors dict: ", assigned_colors)
+    """print("result dict: ", result)
+    print("assigned_colors dict: ", assigned_colors)"""
 
 
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample.txt", encoding='utf-8-sig')
+    f = open("sample2.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -120,7 +127,7 @@ if __name__ == '__main__':
     # print("After Sorting the list\n")
     # print("sorted g1: \n", g1)
     g1.reverse()
-    print("reversed g1: \n", g1)
+    #print("reversed g1: \n", g1)
     a = fixGraphList(originalG1, g1)
-    print("fixed g1: \n", a)
+    #print("fixed g1: \n", a)
     colorGraph(a, int(first[1]))
