@@ -63,33 +63,33 @@ def welshPowell(adj, num_of_ver):
     currColor = 0
     for x in range(0, num_of_ver):
         if color[x] == -1:
-            print("Girdi for x: ", x)
-            print("color : ", currColor)
+            #print("Girdi for x: ", x)
+            #print("color : ", currColor)
             color[x] = currColor
             index = x
 
             for u in range(1, num_of_ver):
-                print("vertex : ", u)
+                #print("vertex : ", u)
                 for i in adj[u]:
-                    print("komşu : ", i)
+                  #  print("komşu : ", i)
                     if i == index:
                         isColored = 1
 
                 if isColored == 0 and color[u] == -1:
-                    print("boyandı")
+                   # print("boyandı")
                     color[u] = currColor
-                    print("")
+                    #print("")
                 else:
-                    print("not boyanmadı")
+                    #print("not boyanmadı")
                     isColored = 0
-                    print(" ")
-            print("color :", color)
-            print(" ")
+                    #print(" ")
+            #print("color :", color)
+            #print(" ")
             currColor += 1
-        else:
-            print("atla")
+        #else:
+            #print("atla")
 
-    print("color :", color)
+    #print("color :", color)
     maxColor = 0
     for u in range(num_of_ver):
         if int(color[u]) > maxColor:
@@ -101,7 +101,7 @@ def welshPowell(adj, num_of_ver):
 # Our sample1.txt file operations
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample.txt", encoding='utf-8-sig')
+    f = open("sample3.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -118,11 +118,11 @@ if __name__ == '__main__':
 
     # Store the original graph in another list
     originalG1 = g1
-    print("original g1: \n", originalG1)
+    #print("original g1: \n", originalG1)
     g1 = sortCrowded(g1)
-    print("new g1:", g1)
+    #print("new g1:", g1)
     g1.reverse()
     fixedSorted = fixGraphList(originalG1, g1)
-    print("fixed g1: \n", fixedSorted)
+    #print("fixed g1: \n", fixedSorted)
 
     welshPowell(fixedSorted, int(first[1]))

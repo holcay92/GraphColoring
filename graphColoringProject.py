@@ -14,13 +14,17 @@ class Vertex:
                 info = line.rsplit(" ")
                 if info[0] == 'e' and int(info[1]) == self.id:
                     self.adjacency.append(int(info[2].strip()))
+                if info[0] == 'e' and int(info[2]) == self.id:
+                    self.adjacency.append(int(info[1].strip()))
+
+
         self.degree = len(self.adjacency)
 
 
 class Management:
 
     def __init__(self):
-        self.file_name = "sample1.txt"
+        self.file_name = "sample3.txt"
         self.number_of_vertices = 0
         self.number_of_edges = 0
         self.number_of_used_colors = 0
@@ -55,6 +59,7 @@ class Management:
         #vertices.reverse()
         #del temp
         self.create_id_vertex_dict(temp)
+        print("temp: " ,temp)
 
     def degree(self, vertex):
         return vertex.degree
@@ -68,7 +73,7 @@ class Management:
             suitable_color, number_of_used_colors = self.select_suitable_color(self.id_vertex[vertex_number])
             if self.id_vertex[vertex_number].color == -1:
                 self.id_vertex[vertex_number].color = suitable_color
-                print("Vertex " + str(vertex_number) + "  -->  Color " + str(self.id_vertex[vertex_number].color))
+                #print("Vertex " + str(vertex_number) + "  -->  Color " + str(self.id_vertex[vertex_number].color))
                 self.check_number_of_used_colors(number_of_used_colors)
                 self.paint_adjacency(self.id_vertex[vertex_number])
 
@@ -92,7 +97,7 @@ class Management:
             suitable_color, number_of_used_colors = self.select_suitable_color(neighbor)
             if neighbor.color == -1:
                 neighbor.color = suitable_color
-                print("Vertex " + str(neighbor.id) + "  -->  Color " + str(neighbor.color))
+                #print("Vertex " + str(neighbor.id) + "  -->  Color " + str(neighbor.color))
                 self.check_number_of_used_colors(number_of_used_colors)
 
     def create_id_vertex_dict(self, vertices):

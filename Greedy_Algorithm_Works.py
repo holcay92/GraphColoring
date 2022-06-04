@@ -165,3 +165,4 @@ if __name__ == '__main__':
     colorList = greedyColoring(g1, int(first[1]))
     returnToOrginal(g1,modifiedList_binary, colorList)
 
+    
