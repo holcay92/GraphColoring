@@ -9,7 +9,7 @@
 def returnToOriginal(current, modifiedList, list_of_colors):
     output_list = []
     # Change the prev original list
-    print("\nOriginal(True) Coloring Order")
+    #print("\nOriginal(True) Coloring Order")
     for i in range(0, len(current)):
         for j in range(0, len(current)):
             if j == modifiedList[i][0]:
@@ -88,12 +88,12 @@ def graph_coloring(adjacency_list, number_of_vertices):
         if int(color_dict[index]) > maxColor:
             maxColor = int(color_dict[index])
 
-    print("Maximum number of Color is : ", maxColor)
+    #print("Maximum number of Color is : ", maxColor)
     return color_dict
 
 
 def createOutputFile(colors, maxColor):
-    file = open("output3.txt", "w")
+    file = open("output1.txt", "w")
     file.write(str(maxColor))
     file.write("\n")
     for i in range(0, len(colors)):
@@ -104,7 +104,7 @@ def createOutputFile(colors, maxColor):
 
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample3.txt", encoding='utf-8-sig')
+    f = open("sample1.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     header_line = f.readline().rsplit(" ")
@@ -123,7 +123,7 @@ if __name__ == '__main__':
     modifiedList_binary = fixGraphList(original_input_list, input_list)
     colorList = graph_coloring(input_list, int(header_line[1]))
     output_colors = returnToOriginal(input_list, modifiedList_binary, colorList)
-    print(output_colors)
+    #print(output_colors)
     createOutputFile(output_colors, max(output_colors))
 
 
