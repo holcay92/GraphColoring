@@ -1,7 +1,22 @@
-# A class to represent a graph object
-import random
+def returnToOrginal(current, modifiedList, colorList):
+    output_list = []
+    # Change the prev original list
+    print("\nOriginal(True) Coloring Order")
+    for i in range(0, len(current)):
+        # print("vertex : ", modifiedList[i])
+        for j in range(0, len(current)):
+            # print("komşular ", j, " : ", modifiedList[i][0])
+            # print("j : ", j)
+            if j == modifiedList[i][0]:
+                """print("Color of vertex", j+1, " :", colorList[modifiedList[j][1]])"""
+                output_list.append(colorList[modifiedList[j][1]])
+
+<<<<<<< Updated upstream
+=======
+    return output_list
 
 
+>>>>>>> Stashed changes
 def sortCrowded(adj):
     adj2 = sorted(adj, key=len)
     return adj2
@@ -45,7 +60,7 @@ def fixGraphList(previous, current):
         # print(" ")
         # print(" ")
 
-    return current
+    return arr
 
 
 def addEdge(adj, vertex, adjacent):
@@ -100,11 +115,28 @@ def colorGraph(adjacency_list, number_of_vertices):
     """print("result dict: ", result)
     print("assigned_colors dict: ", assigned_colors)"""
 
+    return result
+
+
+def createOutputFile(colors, maxColor):
+    file = open("output3.txt", "a")
+    file.write(str(maxColor))
+    file.write("\n")
+    for i in range(0, len(colors)):
+        file.write(str(int(colors[i])-1))
+        file.write(" ")
+
+    file.close()
+
+    # open and read the file after the appending:
+    """file = open("output3.txt", "r")
+    print(f.read())"""
+
 
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample2.txt", encoding='utf-8-sig')
+    f = open("sample.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -120,14 +152,28 @@ if __name__ == '__main__':
         g1 = addEdge(g1, int(temp[1]) - 1, int(temp[2]) - 1)
     # g1=sorted(g1)
     # color graph using the greedy algorithm
-    colorGraph(g1, int(first[1]))
+    #colorGraph(g1, int(first[1]))
     # Store the original graph in another list
-    originalG1 = g1
+    originalG1 = g1.copy()
     g1 = sortCrowded(g1)
     # print("After Sorting the list\n")
     # print("sorted g1: \n", g1)
+    #g1_asc = g1
     g1.reverse()
+<<<<<<< Updated upstream
     #print("reversed g1: \n", g1)
     a = fixGraphList(originalG1, g1)
     #print("fixed g1: \n", a)
     colorGraph(a, int(first[1]))
+=======
+    print("g1: \n", g1)
+    #print("reversed g1: \n", g1)
+    modifiedList_binary = fixGraphList(originalG1, g1)
+
+    colorList = colorGraph(g1, int(first[1]))
+    output_colors = returnToOrginal(g1, modifiedList_binary, colorList)
+    print(output_colors)
+    #createOutputFile(output_colors, max(output_colors))
+    #print("New asceding one: ")
+    #colorGraph(g1_asc,  int(first[1]))
+>>>>>>> Stashed changes
