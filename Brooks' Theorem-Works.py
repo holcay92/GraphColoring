@@ -11,12 +11,9 @@ def returnToOrginal(current, modifiedList, colorList):
                 """print("Color of vertex", j+1, " :", colorList[modifiedList[j][1]])"""
                 output_list.append(colorList[modifiedList[j][1]])
 
-<<<<<<< Updated upstream
-=======
     return output_list
 
 
->>>>>>> Stashed changes
 def sortCrowded(adj):
     adj2 = sorted(adj, key=len)
     return adj2
@@ -112,8 +109,6 @@ def colorGraph(adjacency_list, number_of_vertices):
             maxColor = int(result[u])
 
     print("Maximum number of Color is : ", maxColor)
-    """print("result dict: ", result)
-    print("assigned_colors dict: ", assigned_colors)"""
 
     return result
 
@@ -136,7 +131,7 @@ def createOutputFile(colors, maxColor):
 # Greedy coloring of a graph
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample.txt", encoding='utf-8-sig')
+    f = open("sample2.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     first = f.readline().rsplit(" ")
@@ -160,20 +155,12 @@ if __name__ == '__main__':
     # print("sorted g1: \n", g1)
     #g1_asc = g1
     g1.reverse()
-<<<<<<< Updated upstream
-    #print("reversed g1: \n", g1)
-    a = fixGraphList(originalG1, g1)
-    #print("fixed g1: \n", a)
-    colorGraph(a, int(first[1]))
-=======
-    print("g1: \n", g1)
     #print("reversed g1: \n", g1)
     modifiedList_binary = fixGraphList(originalG1, g1)
-
+    print("g1: \n", g1)
     colorList = colorGraph(g1, int(first[1]))
     output_colors = returnToOrginal(g1, modifiedList_binary, colorList)
     print(output_colors)
     #createOutputFile(output_colors, max(output_colors))
     #print("New asceding one: ")
     #colorGraph(g1_asc,  int(first[1]))
->>>>>>> Stashed changes
