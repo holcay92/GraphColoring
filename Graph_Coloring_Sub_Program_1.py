@@ -1,19 +1,11 @@
-# CSE2046 - Analysis of Algorithms
-# Homework  2 Report
-# Group Members
-# 150119639 - Erdem PEHLİVANLAR
-# 150120056 - Haldun Halil OLCAY
-# 170517033 - YasinAlper BİNGÜL
-
-
 def returnToOriginal(current, modifiedList, list_of_colors):
     output_list = []
     # Change the prev original list
-    #print("\nOriginal(True) Coloring Order")
     for i in range(0, len(current)):
         for j in range(0, len(current)):
             if j == modifiedList[i][0]:
                 output_list.append(list_of_colors[modifiedList[j][1]])
+
     return output_list
 
 
@@ -46,20 +38,22 @@ def fixGraphList(previous_list, current_list):
                 if current_list[i][j] == modified_list[z][0]:
                     current_list[i][j] = modified_list[z][1]
                     break
+
     return modified_list
 
 
-def addEdge(adj, vertex, adjacent):
-    if not vertex in adj[adjacent]:
-        adj[vertex].append(adjacent)
-    if not vertex in adj[adjacent]:
-        adj[adjacent].append(vertex)
+def addEdge(adjacent_list, vertex, adjacent):
+    if not vertex in adjacent_list[adjacent]:
+        adjacent_list[vertex].append(adjacent)
 
-    return adj
+    if not vertex in adjacent_list[adjacent]:
+        adjacent_list[adjacent].append(vertex)
+
+    return adjacent_list
 
 
 # Function to assign colors to vertices of a graph
-def graph_coloring(adjacency_list, number_of_vertices):
+def graph_coloring_1(adjacency_list, number_of_vertices):
     # keep track of the color assigned_colors to each vertex
     color_dict = {}
 
@@ -74,7 +68,7 @@ def graph_coloring(adjacency_list, number_of_vertices):
                     assigned_colors.sort()
 
         # check for an available color
-        color = 1
+        color = 0
         for c in assigned_colors:
             if color != c:
                 break
@@ -88,42 +82,88 @@ def graph_coloring(adjacency_list, number_of_vertices):
         if int(color_dict[index]) > maxColor:
             maxColor = int(color_dict[index])
 
-    #print("Maximum number of Color is : ", maxColor)
-    return color_dict
+    print("Maximum number of Color is : ", maxColor + 1)
+    # print("Colors are : ", color_dict)
+    return color_dict, maxColor + 1
+
+
+# Function to assign colors to vertices of a graph
+def graph_coloring_2(adjacency_list, number_of_vertices):
+    result = [-1] * number_of_vertices
+    result[0] = 0
+    available = [False] * number_of_vertices
+
+    # Assign colors to remaining V-1 vertices
+    for u in range(1, number_of_vertices):
+        for i in adjacency_list[u]:
+            if result[i] != -1:
+                available[result[i]] = True
+
+        # Find the first available color
+        cr = 0
+        while cr < number_of_vertices:
+            # print("cr  : ", cr)
+            if available[cr] == False:
+                break
+            cr += 1
+        result[u] = cr
+
+        for i in adjacency_list[u]:
+            if result[i] != -1:
+                available[result[i]] = False
+
+    maxColor = 0
+    for u in range(number_of_vertices):
+        if int(result[u]) > maxColor:
+            maxColor = int(result[u])
+
+    print("Maximum number of Color is : ", maxColor + 1)
+    return result, maxColor + 1
+
 
 
 def createOutputFile(colors, maxColor):
-    file = open("output1.txt", "w")
+    file = open("output3.txt", "w")
     file.write(str(maxColor))
     file.write("\n")
     for i in range(0, len(colors)):
-        file.write(str(int(colors[i]) - 1))
+        file.write(str(int(colors[i])))
         file.write(" ")
+
     file.close()
 
 
 if __name__ == '__main__':
     # Take the input file into variable
-    f = open("sample1.txt", encoding='utf-8-sig')
+    f = open("sample3.txt", encoding='utf-8-sig')
 
     # Split the arguments as printed
     header_line = f.readline().rsplit(" ")
     # Create vertices number of given input
     input_list = [[] for i in range(int(header_line[1]))]
 
-    for i in range(1, int(header_line[2])):
-        temp = f.readline().rsplit(" ")
-        input_list = addEdge(input_list, int(temp[1]) - 1, int(temp[2]) - 1)
+    for i in range(1, int(header_line[2]) + 1):
+        line = f.readline().rsplit(" ")
+        input_list = addEdge(input_list, int(line[1]) - 1, int(line[2]) - 1)
 
     # Store the original graph in another list
     original_input_list = input_list.copy()
+    #print("input_list : ", input_list)
     input_list = sortCrowded(input_list)
     # reverse the 'input_list' in order to make it in descending order
     input_list.reverse()
     modifiedList_binary = fixGraphList(original_input_list, input_list)
-    colorList = graph_coloring(input_list, int(header_line[1]))
+    colorList2, min_value_2 = graph_coloring_2(input_list, int(header_line[1]))
+    print("min_value_2 : ", min_value_2)
+    colorList1, min_value_1 = graph_coloring_1(input_list, int(header_line[1]))
+    print("min_value_1 : ", min_value_1)
+
+    min_value = min(min_value_1, min_value_2)
+    if min_value_1 < min_value_2:
+        colorList = colorList1
+    else:
+        colorList = colorList2
+
     output_colors = returnToOriginal(input_list, modifiedList_binary, colorList)
-    #print(output_colors)
-    createOutputFile(output_colors, max(output_colors))
-
-
+    # print(output_colors)
+    createOutputFile(output_colors, min_value)
