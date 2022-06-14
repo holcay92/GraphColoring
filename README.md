@@ -1,8 +1,8 @@
 # GraphColoring
 
-##CSE2046 - Analysis of Algorithms
+## CSE2046 - Analysis of Algorithms
 
- ###Homework  2 Report
+### Homework  2 Report
  
  Group Members:
 
